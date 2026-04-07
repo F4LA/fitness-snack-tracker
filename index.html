@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fitness Snack Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #F7F4EF;
+    --surface: #FFFFFF;
+    --surface2: #F0EDE7;
+    --text: #1A1714;
+    --text-muted: #7A756E;
+    --text-faint: #B0AA9F;
+    --border: rgba(26,23,20,0.1);
+    --border-strong: rgba(26,23,20,0.2);
+    --accent: #D4522A;
+    --accent-light: #FAE8E2;
+    --green: #2D7A4F;
+    --green-light: #E2F0E9;
+    --amber: #C07A1A;
+    --amber-light: #FDF1DC;
+    --gray-dot: #B0AA9F;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* Header */
+  .header {
+    background: var(--text);
+    color: #F7F4EF;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: 'FS';
+    position: absolute;
+    right: -1rem;
+    top: -1.5rem;
+    font-family: 'DM Serif Display', serif;
+    font-size: 10rem;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .brand { display: flex; flex-direction: column; gap: 4px; }
+  .brand-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(247,244,239,0.45);
+  }
+  .brand-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: #F7F4EF;
+    line-height: 1.1;
+  }
+  .stats-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.75rem;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .stat-pill-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.75rem;
+    color: #F7F4EF;
+    line-height: 1;
+  }
+  .stat-pill-label {
+    font-size: 12px;
+    color: rgba(247,244,239,0.45);
+    font-weight: 300;
+  }
+  .stat-divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(247,244,239,0.12);
+    align-self: center;
+  }
+
+  /* Main */
+  .main { max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.15s;
+    font-weight: 400;
+  }
+  .filter-btn:hover { border-color: var(--border-strong); color: var(--text); }
+  .filter-btn.active {
+    background: var(--text);
+    border-color: var(--text);
+    color: #F7F4EF;
+    font-weight: 500;
+  }
+  .cat-select {
+    margin-left: auto;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--text-muted);
+    cursor: pointer;
+    appearance: none;
+    padding-right: 28px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237A756E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+  }
+
+  /* Topic list */
+  .topic-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 2rem; }
+
+  .topic-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .topic-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: 0 2px 12px rgba(26,23,20,0.06);
+  }
+  .status-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .dot-idea { background: var(--gray-dot); }
+  .dot-progress { background: var(--amber); }
+  .dot-done { background: var(--green); }
+
+  .topic-info { flex: 1; min-width: 0; }
+  .topic-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .topic-category {
+    font-size: 12px;
+    color: var(--text-faint);
+    font-weight: 300;
+  }
+
+  .status-badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 100px;
+    cursor: pointer;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+  .badge-idea { background: var(--surface2); color: var(--text-muted); }
+  .badge-progress { background: var(--amber-light); color: var(--amber); }
+  .badge-done { background: var(--green-light); color: var(--green); }
+
+  .delete-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-faint);
+    font-size: 18px;
+    line-height: 1;
+    padding: 2px 4px;
+    transition: color 0.15s;
+    font-weight: 300;
+  }
+  .delete-btn:hover { color: var(--accent); }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-faint);
+  }
+  .empty-state p { font-size: 14px; margin-top: 8px; }
+  .empty-icon { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--border-strong); }
+
+  /* Add section */
+  .add-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+  .add-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+  }
+  .add-tab {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    padding: 6px 14px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+  .add-tab.active {
+    background: var(--surface2);
+    color: var(--text);
+    font-weight: 500;
+  }
+  .add-tab:hover:not(.active) { color: var(--text); }
+
+  .form-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .form-input {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 9px 14px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: border-color 0.15s;
+    width: 100%;
+  }
+  .form-input:focus { outline: none; border-color: var(--border-strong); }
+  .form-input::placeholder { color: var(--text-faint); }
+
+  .form-select {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 9px 14px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .add-btn {
+    background: var(--text);
+    color: #F7F4EF;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 9px 20px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+  }
+  .add-btn:hover { opacity: 0.85; }
+
+  .single-form { display: flex; flex-direction: column; gap: 10px; }
+  .bulk-hint {
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .bulk-textarea {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    width: 100%;
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.7;
+    transition: border-color 0.15s;
+  }
+  .bulk-textarea:focus { outline: none; border-color: var(--border-strong); }
+  .bulk-textarea::placeholder { color: var(--text-faint); }
+
+  /* Status cycling */
+  .status-badge { cursor: pointer; user-select: none; }
+  .status-badge:hover { opacity: 0.8; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text);
+    color: #F7F4EF;
+    padding: 10px 22px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0;
+    transition: all 0.25s;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 999;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Category section headers */
+  .cat-header {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    padding: 1.25rem 0 0.5rem;
+  }
+  .cat-header:first-child { padding-top: 0; }
+
+  @media (max-width: 540px) {
+    .header { padding: 2rem 1.25rem 1.75rem; }
+    .brand-title { font-size: 1.6rem; }
+    .main { padding: 1.5rem 1rem 3rem; }
+    .form-row { flex-direction: column; }
+    .cat-select { margin-left: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="brand">
+      <span class="brand-label">Fit4Life Academy</span>
+      <h1 class="brand-title">Fitness Snack Tracker</h1>
+    </div>
+  </div>
+  <div class="stats-row" id="stats-row"></div>
+</div>
+
+<div class="main">
+  <div class="filter-bar" id="filter-bar"></div>
+  <div class="topic-list" id="topic-list"></div>
+
+  <div class="add-section">
+    <div class="add-tabs">
+      <button class="add-tab active" onclick="switchTab('single', this)">Add one topic</button>
+      <button class="add-tab" onclick="switchTab('bulk', this)">Bulk import</button>
+    </div>
+
+    <div id="tab-single" class="single-form">
+      <input type="text" class="form-input" id="new-title" placeholder="Topic title..." />
+      <div class="form-row">
+        <input type="text" class="form-input" id="new-category" placeholder="Category (Training, Mindset, Nutrition...)" style="flex:1;" />
+        <select class="form-select" id="new-status">
+          <option value="idea">Idea</option>
+          <option value="progress">In progress</option>
+          <option value="done">Done</option>
+        </select>
+        <button class="add-btn" onclick="addTopic()">+ Add</button>
+      </div>
+    </div>
+
+    <div id="tab-bulk" style="display:none;">
+      <p class="bulk-hint">Paste one topic per line. All topics will be imported as ideas under the category you choose.</p>
+      <textarea class="bulk-textarea" id="bulk-text" placeholder="Why you're not failing because you're lazy&#10;Avoidance goals vs approach goals&#10;Make effort the goal, not the outcome&#10;..."></textarea>
+      <div class="form-row" style="margin-top:10px;">
+        <input type="text" class="form-input" id="bulk-category" placeholder="Category for all topics..." style="flex:1;" />
+        <button class="add-btn" onclick="bulkImport()">Import all</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STORAGE_KEY = 'fs-tracker-v1';
+
+const seed = [
+  { id: 1, title: "You don't need 6 days in the gym", category: "Training", status: "done" },
+  { id: 2, title: "The 2+2 model (strength + cardio)", category: "Training", status: "idea" },
+  { id: 3, title: "Train around your life, not against it", category: "Training", status: "done" },
+  { id: 4, title: "Real people, real schedules", category: "Training", status: "idea" },
+];
+
+let topics = [];
+let activeFilter = 'all';
+let activeCat = 'all';
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    topics = raw ? JSON.parse(raw) : seed;
+  } catch(e) { topics = seed; }
+  render();
+}
+
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(topics)); } catch(e) {}
+}
+
+function getCategories() {
+  return [...new Set(topics.map(t => t.category))].sort();
+}
+
+function render() {
+  const total = topics.length;
+  const done = topics.filter(t => t.status === 'done').length;
+  const inprog = topics.filter(t => t.status === 'progress').length;
+  const ideas = topics.filter(t => t.status === 'idea').length;
+
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-pill"><span class="stat-pill-num">${total}</span><span class="stat-pill-label">total</span></div>
+    <div class="stat-divider"></div>
+    <div class="stat-pill"><span class="stat-pill-num">${ideas}</span><span class="stat-pill-label">ideas</span></div>
+    <div class="stat-divider"></div>
+    <div class="stat-pill"><span class="stat-pill-num">${inprog}</span><span class="stat-pill-label">in progress</span></div>
+    <div class="stat-divider"></div>
+    <div class="stat-pill"><span class="stat-pill-num">${done}</span><span class="stat-pill-label">done</span></div>
+  `;
+
+  const cats = getCategories();
+  const statusLabels = { all: 'All', idea: 'Ideas', progress: 'In progress', done: 'Done' };
+  document.getElementById('filter-bar').innerHTML =
+    Object.entries(statusLabels).map(([v, l]) =>
+      `<button class="filter-btn ${activeFilter === v ? 'active' : ''}" onclick="setFilter('${v}')">${l}</button>`
+    ).join('') +
+    `<select class="cat-select" onchange="setCat(this.value)">
+      <option value="all">All categories</option>
+      ${cats.map(c => `<option value="${c}" ${activeCat === c ? 'selected' : ''}>${c}</option>`).join('')}
+    </select>`;
+
+  let filtered = topics;
+  if (activeFilter !== 'all') filtered = filtered.filter(t => t.status === activeFilter);
+  if (activeCat !== 'all') filtered = filtered.filter(t => t.category === activeCat);
+
+  const list = document.getElementById('topic-list');
+
+  if (filtered.length === 0) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">—</div><p>No topics here yet. Add one below.</p></div>`;
+    return;
+  }
+
+  const grouped = {};
+  filtered.forEach(t => {
+    if (!grouped[t.category]) grouped[t.category] = [];
+    grouped[t.category].push(t);
+  });
+
+  list.innerHTML = Object.entries(grouped).map(([cat, items]) => `
+    <div class="cat-header">${cat}</div>
+    ${items.map(t => `
+      <div class="topic-card" id="card-${t.id}">
+        <div class="status-dot dot-${t.status}"></div>
+        <div class="topic-info">
+          <div class="topic-title" title="${t.title}">${t.title}</div>
+          <div class="topic-category">${t.category}</div>
+        </div>
+        <button class="status-badge badge-${t.status}" onclick="cycleStatus(${t.id})" title="Click to change status">
+          ${t.status === 'idea' ? 'Idea' : t.status === 'progress' ? 'In progress' : 'Done'}
+        </button>
+        <button class="delete-btn" onclick="deleteTopic(${t.id})" title="Remove">×</button>
+      </div>
+    `).join('')}
+  `).join('');
+}
+
+function setFilter(f) { activeFilter = f; render(); }
+function setCat(c) { activeCat = c; render(); }
+
+function cycleStatus(id) {
+  const order = ['idea', 'progress', 'done'];
+  topics = topics.map(t => {
+    if (t.id !== id) return t;
+    const next = order[(order.indexOf(t.status) + 1) % order.length];
+    return {...t, status: next};
+  });
+  save(); render();
+}
+
+function deleteTopic(id) {
+  if (!confirm('Remove this topic?')) return;
+  topics = topics.filter(t => t.id !== id);
+  save(); render();
+}
+
+function addTopic() {
+  const title = document.getElementById('new-title').value.trim();
+  const category = document.getElementById('new-category').value.trim() || 'General';
+  const status = document.getElementById('new-status').value;
+  if (!title) return;
+  topics.push({ id: Date.now(), title, category, status });
+  document.getElementById('new-title').value = '';
+  document.getElementById('new-category').value = '';
+  save(); render();
+  showToast('Topic added!');
+}
+
+function bulkImport() {
+  const raw = document.getElementById('bulk-text').value.trim();
+  const category = document.getElementById('bulk-category').value.trim() || 'General';
+  if (!raw) return;
+  const lines = raw.split('\n').map(l => l.trim()).filter(l => l);
+  lines.forEach(line => {
+    topics.push({ id: Date.now() + Math.random(), title: line, category, status: 'idea' });
+  });
+  document.getElementById('bulk-text').value = '';
+  document.getElementById('bulk-category').value = '';
+  save(); render();
+  showToast(`${lines.length} topics imported!`);
+}
+
+function switchTab(tab, el) {
+  document.querySelectorAll('.add-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-single').style.display = tab === 'single' ? 'flex' : 'none';
+  document.getElementById('tab-bulk').style.display = tab === 'bulk' ? 'block' : 'none';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.activeElement === document.getElementById('new-title')) addTopic();
+});
+
+load();
+</script>
+</body>
+</html>
