@@ -33,10 +33,8 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    padding: 0;
   }
 
-  /* Header */
   .header {
     background: var(--text);
     color: #F7F4EF;
@@ -76,46 +74,32 @@
     color: #F7F4EF;
     line-height: 1.1;
   }
-  .stats-row {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 1.75rem;
-    flex-wrap: wrap;
-  }
-  .stat-pill {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-  }
-  .stat-pill-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.75rem;
+  .import-btn-wrap { display: flex; align-items: center; }
+  .import-btn {
+    background: rgba(247,244,239,0.1);
+    border: 1px solid rgba(247,244,239,0.2);
+    border-radius: 100px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
     color: #F7F4EF;
-    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
   }
-  .stat-pill-label {
-    font-size: 12px;
-    color: rgba(247,244,239,0.45);
-    font-weight: 300;
-  }
-  .stat-divider {
-    width: 1px;
-    height: 28px;
-    background: rgba(247,244,239,0.12);
-    align-self: center;
-  }
+  .import-btn:hover { background: rgba(247,244,239,0.18); }
+  #json-file-input { display: none; }
 
-  /* Main */
+  .stats-row { display: flex; gap: 1.5rem; margin-top: 1.75rem; flex-wrap: wrap; }
+  .stat-pill { display: flex; align-items: baseline; gap: 6px; }
+  .stat-pill-num { font-family: 'DM Serif Display', serif; font-size: 1.75rem; color: #F7F4EF; line-height: 1; }
+  .stat-pill-label { font-size: 12px; color: rgba(247,244,239,0.45); font-weight: 300; }
+  .stat-divider { width: 1px; height: 28px; background: rgba(247,244,239,0.12); align-self: center; }
+
   .main { max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
-  /* Filter bar */
-  .filter-bar {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-  }
+  .filter-bar { display: flex; gap: 8px; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
   .filter-btn {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -126,35 +110,26 @@
     cursor: pointer;
     color: var(--text-muted);
     transition: all 0.15s;
-    font-weight: 400;
   }
   .filter-btn:hover { border-color: var(--border-strong); color: var(--text); }
-  .filter-btn.active {
-    background: var(--text);
-    border-color: var(--text);
-    color: #F7F4EF;
-    font-weight: 500;
-  }
+  .filter-btn.active { background: var(--text); border-color: var(--text); color: #F7F4EF; font-weight: 500; }
   .cat-select {
     margin-left: auto;
     border: 1px solid var(--border);
     border-radius: 100px;
-    padding: 6px 14px;
+    padding: 6px 28px 6px 14px;
     font-size: 13px;
     font-family: 'DM Sans', sans-serif;
     background: var(--surface);
     color: var(--text-muted);
     cursor: pointer;
     appearance: none;
-    padding-right: 28px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237A756E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
   }
 
-  /* Topic list */
   .topic-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 2rem; }
-
   .topic-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -165,200 +140,89 @@
     gap: 14px;
     transition: border-color 0.15s, box-shadow 0.15s;
   }
-  .topic-card:hover {
-    border-color: var(--border-strong);
-    box-shadow: 0 2px 12px rgba(26,23,20,0.06);
-  }
+  .topic-card:hover { border-color: var(--border-strong); box-shadow: 0 2px 12px rgba(26,23,20,0.06); }
   .status-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
   .dot-idea { background: var(--gray-dot); }
   .dot-progress { background: var(--amber); }
   .dot-done { background: var(--green); }
-
   .topic-info { flex: 1; min-width: 0; }
-  .topic-title {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .topic-category {
-    font-size: 12px;
-    color: var(--text-faint);
-    font-weight: 300;
-  }
-
+  .topic-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topic-category { font-size: 12px; color: var(--text-faint); font-weight: 300; }
   .status-badge {
-    font-size: 11px;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 100px;
-    cursor: pointer;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    white-space: nowrap;
-    letter-spacing: 0.02em;
+    font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 100px;
+    cursor: pointer; border: none; font-family: 'DM Sans', sans-serif;
+    white-space: nowrap; letter-spacing: 0.02em; user-select: none;
   }
+  .status-badge:hover { opacity: 0.8; }
   .badge-idea { background: var(--surface2); color: var(--text-muted); }
   .badge-progress { background: var(--amber-light); color: var(--amber); }
   .badge-done { background: var(--green-light); color: var(--green); }
-
   .delete-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: var(--text-faint);
-    font-size: 18px;
-    line-height: 1;
-    padding: 2px 4px;
-    transition: color 0.15s;
-    font-weight: 300;
+    background: transparent; border: none; cursor: pointer;
+    color: var(--text-faint); font-size: 18px; line-height: 1;
+    padding: 2px 4px; transition: color 0.15s; font-weight: 300;
   }
   .delete-btn:hover { color: var(--accent); }
 
-  .empty-state {
-    text-align: center;
-    padding: 3rem 1rem;
-    color: var(--text-faint);
-  }
+  .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-faint); }
   .empty-state p { font-size: 14px; margin-top: 8px; }
   .empty-icon { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--border-strong); }
 
-  /* Add section */
-  .add-section {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-  }
-  .add-tabs {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 1.25rem;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 1rem;
-  }
+  .add-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+  .add-tabs { display: flex; gap: 4px; margin-bottom: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
   .add-tab {
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: var(--radius-sm);
-    padding: 6px 14px;
-    font-size: 13px;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    color: var(--text-muted);
-    transition: all 0.15s;
+    background: transparent; border: 1px solid transparent; border-radius: var(--radius-sm);
+    padding: 6px 14px; font-size: 13px; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; color: var(--text-muted); transition: all 0.15s;
   }
-  .add-tab.active {
-    background: var(--surface2);
-    color: var(--text);
-    font-weight: 500;
-  }
+  .add-tab.active { background: var(--surface2); color: var(--text); font-weight: 500; }
   .add-tab:hover:not(.active) { color: var(--text); }
 
+  .single-form { display: flex; flex-direction: column; gap: 10px; }
   .form-row { display: flex; gap: 10px; flex-wrap: wrap; }
   .form-input {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 9px 14px;
-    font-size: 14px;
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    transition: border-color 0.15s;
-    width: 100%;
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 9px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif;
+    background: var(--bg); color: var(--text); transition: border-color 0.15s; width: 100%;
   }
   .form-input:focus { outline: none; border-color: var(--border-strong); }
   .form-input::placeholder { color: var(--text-faint); }
-
   .form-select {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 9px 14px;
-    font-size: 14px;
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    cursor: pointer;
-    flex-shrink: 0;
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 9px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif;
+    background: var(--bg); color: var(--text); cursor: pointer; flex-shrink: 0;
   }
-
   .add-btn {
-    background: var(--text);
-    color: #F7F4EF;
-    border: none;
-    border-radius: var(--radius-sm);
-    padding: 9px 20px;
-    font-size: 14px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: opacity 0.15s;
-    flex-shrink: 0;
+    background: var(--text); color: #F7F4EF; border: none; border-radius: var(--radius-sm);
+    padding: 9px 20px; font-size: 14px; font-family: 'DM Sans', sans-serif;
+    font-weight: 500; cursor: pointer; white-space: nowrap; transition: opacity 0.15s; flex-shrink: 0;
   }
   .add-btn:hover { opacity: 0.85; }
-
-  .single-form { display: flex; flex-direction: column; gap: 10px; }
-  .bulk-hint {
-    font-size: 12px;
-    color: var(--text-faint);
-    margin-bottom: 10px;
-    line-height: 1.5;
-  }
+  .bulk-hint { font-size: 12px; color: var(--text-faint); margin-bottom: 10px; line-height: 1.5; }
   .bulk-textarea {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 10px 14px;
-    font-size: 13px;
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    width: 100%;
-    min-height: 140px;
-    resize: vertical;
-    line-height: 1.7;
-    transition: border-color 0.15s;
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 10px 14px; font-size: 13px; font-family: 'DM Sans', sans-serif;
+    background: var(--bg); color: var(--text); width: 100%; min-height: 140px;
+    resize: vertical; line-height: 1.7;
   }
   .bulk-textarea:focus { outline: none; border-color: var(--border-strong); }
   .bulk-textarea::placeholder { color: var(--text-faint); }
 
-  /* Status cycling */
-  .status-badge { cursor: pointer; user-select: none; }
-  .status-badge:hover { opacity: 0.8; }
-
-  /* Toast */
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: var(--text);
-    color: #F7F4EF;
-    padding: 10px 22px;
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 500;
-    opacity: 0;
-    transition: all 0.25s;
-    pointer-events: none;
-    white-space: nowrap;
-    z-index: 999;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  /* Category section headers */
   .cat-header {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-    padding: 1.25rem 0 0.5rem;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-faint); padding: 1.25rem 0 0.5rem;
   }
   .cat-header:first-child { padding-top: 0; }
+
+  .toast {
+    position: fixed; bottom: 2rem; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text); color: #F7F4EF;
+    padding: 10px 22px; border-radius: 100px;
+    font-size: 13px; font-weight: 500; opacity: 0;
+    transition: all 0.25s; pointer-events: none; white-space: nowrap; z-index: 999;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   @media (max-width: 540px) {
     .header { padding: 2rem 1.25rem 1.75rem; }
@@ -376,6 +240,10 @@
     <div class="brand">
       <span class="brand-label">Fit4Life Academy</span>
       <h1 class="brand-title">Fitness Snack Tracker</h1>
+    </div>
+    <div class="import-btn-wrap">
+      <button class="import-btn" onclick="document.getElementById('json-file-input').click()">+ Import JSON</button>
+      <input type="file" id="json-file-input" accept=".json" onchange="importJSON(event)" />
     </div>
   </div>
   <div class="stats-row" id="stats-row"></div>
@@ -406,7 +274,7 @@
 
     <div id="tab-bulk" style="display:none;">
       <p class="bulk-hint">Paste one topic per line. All topics will be imported as ideas under the category you choose.</p>
-      <textarea class="bulk-textarea" id="bulk-text" placeholder="Why you're not failing because you're lazy&#10;Avoidance goals vs approach goals&#10;Make effort the goal, not the outcome&#10;..."></textarea>
+      <textarea class="bulk-textarea" id="bulk-text" placeholder="Topic one&#10;Topic two&#10;Topic three..."></textarea>
       <div class="form-row" style="margin-top:10px;">
         <input type="text" class="form-input" id="bulk-category" placeholder="Category for all topics..." style="flex:1;" />
         <button class="add-btn" onclick="bulkImport()">Import all</button>
@@ -419,7 +287,6 @@
 
 <script>
 const STORAGE_KEY = 'fs-tracker-v1';
-
 const seed = [
   { id: 1, title: "You don't need 6 days in the gym", category: "Training", status: "done" },
   { id: 2, title: "The 2+2 model (strength + cardio)", category: "Training", status: "idea" },
@@ -432,10 +299,8 @@ let activeFilter = 'all';
 let activeCat = 'all';
 
 function load() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    topics = raw ? JSON.parse(raw) : seed;
-  } catch(e) { topics = seed; }
+  try { const raw = localStorage.getItem(STORAGE_KEY); topics = raw ? JSON.parse(raw) : seed; }
+  catch(e) { topics = seed; }
   render();
 }
 
@@ -471,7 +336,7 @@ function render() {
     ).join('') +
     `<select class="cat-select" onchange="setCat(this.value)">
       <option value="all">All categories</option>
-      ${cats.map(c => `<option value="${c}" ${activeCat === c ? 'selected' : ''}>${c}</option>`).join('')}
+      ${cats.map(c => `<option value="${c}" ${activeCat === c ? 'selected':''}>${c}</option>`).join('')}
     </select>`;
 
   let filtered = topics;
@@ -479,22 +344,18 @@ function render() {
   if (activeCat !== 'all') filtered = filtered.filter(t => t.category === activeCat);
 
   const list = document.getElementById('topic-list');
-
   if (filtered.length === 0) {
     list.innerHTML = `<div class="empty-state"><div class="empty-icon">—</div><p>No topics here yet. Add one below.</p></div>`;
     return;
   }
 
   const grouped = {};
-  filtered.forEach(t => {
-    if (!grouped[t.category]) grouped[t.category] = [];
-    grouped[t.category].push(t);
-  });
+  filtered.forEach(t => { if (!grouped[t.category]) grouped[t.category] = []; grouped[t.category].push(t); });
 
   list.innerHTML = Object.entries(grouped).map(([cat, items]) => `
     <div class="cat-header">${cat}</div>
     ${items.map(t => `
-      <div class="topic-card" id="card-${t.id}">
+      <div class="topic-card">
         <div class="status-dot dot-${t.status}"></div>
         <div class="topic-info">
           <div class="topic-title" title="${t.title}">${t.title}</div>
@@ -503,7 +364,7 @@ function render() {
         <button class="status-badge badge-${t.status}" onclick="cycleStatus(${t.id})" title="Click to change status">
           ${t.status === 'idea' ? 'Idea' : t.status === 'progress' ? 'In progress' : 'Done'}
         </button>
-        <button class="delete-btn" onclick="deleteTopic(${t.id})" title="Remove">×</button>
+        <button class="delete-btn" onclick="deleteTopic(${t.id})">×</button>
       </div>
     `).join('')}
   `).join('');
@@ -514,11 +375,7 @@ function setCat(c) { activeCat = c; render(); }
 
 function cycleStatus(id) {
   const order = ['idea', 'progress', 'done'];
-  topics = topics.map(t => {
-    if (t.id !== id) return t;
-    const next = order[(order.indexOf(t.status) + 1) % order.length];
-    return {...t, status: next};
-  });
+  topics = topics.map(t => t.id !== id ? t : {...t, status: order[(order.indexOf(t.status) + 1) % order.length]});
   save(); render();
 }
 
@@ -545,13 +402,33 @@ function bulkImport() {
   const category = document.getElementById('bulk-category').value.trim() || 'General';
   if (!raw) return;
   const lines = raw.split('\n').map(l => l.trim()).filter(l => l);
-  lines.forEach(line => {
-    topics.push({ id: Date.now() + Math.random(), title: line, category, status: 'idea' });
-  });
+  lines.forEach(line => topics.push({ id: Date.now() + Math.random(), title: line, category, status: 'idea' }));
   document.getElementById('bulk-text').value = '';
   document.getElementById('bulk-category').value = '';
   save(); render();
   showToast(`${lines.length} topics imported!`);
+}
+
+function importJSON(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!Array.isArray(imported)) { showToast('Invalid file format'); return; }
+      let count = 0;
+      imported.forEach(item => {
+        if (!item.title) return;
+        topics.push({ id: Date.now() + Math.random(), title: item.title, category: item.category || 'General', status: item.status || 'idea' });
+        count++;
+      });
+      save(); render();
+      showToast(`${count} topics imported!`);
+    } catch(err) { showToast('Could not read file'); }
+    event.target.value = '';
+  };
+  reader.readAsText(file);
 }
 
 function switchTab(tab, el) {
