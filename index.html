@@ -16,7 +16,6 @@
     --border: rgba(26,23,20,0.1);
     --border-strong: rgba(26,23,20,0.2);
     --accent: #D4522A;
-    --accent-light: #FAE8E2;
     --green: #2D7A4F;
     --green-light: #E2F0E9;
     --amber: #C07A1A;
@@ -25,72 +24,22 @@
     --radius: 12px;
     --radius-sm: 8px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
   .header {
-    background: var(--text);
-    color: #F7F4EF;
+    background: var(--text); color: #F7F4EF;
     padding: 2.5rem 2rem 2rem;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
   .header::after {
-    content: 'FS';
-    position: absolute;
-    right: -1rem;
-    top: -1.5rem;
-    font-family: 'DM Serif Display', serif;
-    font-size: 10rem;
-    color: rgba(255,255,255,0.04);
-    line-height: 1;
-    pointer-events: none;
-  }
-  .header-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
+    content: 'FS'; position: absolute; right: -1rem; top: -1.5rem;
+    font-family: 'DM Serif Display', serif; font-size: 10rem;
+    color: rgba(255,255,255,0.04); line-height: 1; pointer-events: none;
   }
   .brand { display: flex; flex-direction: column; gap: 4px; }
-  .brand-label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(247,244,239,0.45);
-  }
-  .brand-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2rem;
-    color: #F7F4EF;
-    line-height: 1.1;
-  }
-  .import-btn-wrap { display: flex; align-items: center; }
-  .import-btn {
-    background: rgba(247,244,239,0.1);
-    border: 1px solid rgba(247,244,239,0.2);
-    border-radius: 100px;
-    padding: 8px 18px;
-    font-size: 13px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    color: #F7F4EF;
-    cursor: pointer;
-    transition: background 0.15s;
-    white-space: nowrap;
-  }
-  .import-btn:hover { background: rgba(247,244,239,0.18); }
-  #json-file-input { display: none; }
-
+  .brand-label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(247,244,239,0.45); }
+  .brand-title { font-family: 'DM Serif Display', serif; font-size: 2rem; color: #F7F4EF; line-height: 1.1; }
   .stats-row { display: flex; gap: 1.5rem; margin-top: 1.75rem; flex-wrap: wrap; }
   .stat-pill { display: flex; align-items: baseline; gap: 6px; }
   .stat-pill-num { font-family: 'DM Serif Display', serif; font-size: 1.75rem; color: #F7F4EF; line-height: 1; }
@@ -99,80 +48,32 @@
 
   .main { max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
-  .filter-bar { display: flex; gap: 8px; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .filter-bar { display: flex; gap: 8px; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; }
   .filter-btn {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 6px 16px;
-    font-size: 13px;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    color: var(--text-muted);
-    transition: all 0.15s;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 100px; padding: 6px 16px; font-size: 13px;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--text-muted); transition: all 0.15s;
   }
   .filter-btn:hover { border-color: var(--border-strong); color: var(--text); }
   .filter-btn.active { background: var(--text); border-color: var(--text); color: #F7F4EF; font-weight: 500; }
   .cat-select {
-    margin-left: auto;
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 6px 28px 6px 14px;
-    font-size: 13px;
-    font-family: 'DM Sans', sans-serif;
-    background: var(--surface);
-    color: var(--text-muted);
-    cursor: pointer;
-    appearance: none;
+    margin-left: auto; border: 1px solid var(--border); border-radius: 100px;
+    padding: 6px 28px 6px 14px; font-size: 13px; font-family: 'DM Sans', sans-serif;
+    background: var(--surface); color: var(--text-muted); cursor: pointer; appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237A756E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
+    background-repeat: no-repeat; background-position: right 10px center;
   }
 
-  .topic-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 2rem; }
-  .topic-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1rem 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: border-color 0.15s, box-shadow 0.15s;
+  /* Add section — now ABOVE topic list */
+  .add-section {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
   }
-  .topic-card:hover { border-color: var(--border-strong); box-shadow: 0 2px 12px rgba(26,23,20,0.06); }
-  .status-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-  .dot-idea { background: var(--gray-dot); }
-  .dot-progress { background: var(--amber); }
-  .dot-done { background: var(--green); }
-  .topic-info { flex: 1; min-width: 0; }
-  .topic-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .topic-category { font-size: 12px; color: var(--text-faint); font-weight: 300; }
-  .status-badge {
-    font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 100px;
-    cursor: pointer; border: none; font-family: 'DM Sans', sans-serif;
-    white-space: nowrap; letter-spacing: 0.02em; user-select: none;
-  }
-  .status-badge:hover { opacity: 0.8; }
-  .badge-idea { background: var(--surface2); color: var(--text-muted); }
-  .badge-progress { background: var(--amber-light); color: var(--amber); }
-  .badge-done { background: var(--green-light); color: var(--green); }
-  .delete-btn {
-    background: transparent; border: none; cursor: pointer;
-    color: var(--text-faint); font-size: 18px; line-height: 1;
-    padding: 2px 4px; transition: color 0.15s; font-weight: 300;
-  }
-  .delete-btn:hover { color: var(--accent); }
-
-  .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-faint); }
-  .empty-state p { font-size: 14px; margin-top: 8px; }
-  .empty-icon { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--border-strong); }
-
-  .add-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
-  .add-tabs { display: flex; gap: 4px; margin-bottom: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+  .add-tabs { display: flex; gap: 4px; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.875rem; }
   .add-tab {
     background: transparent; border: 1px solid transparent; border-radius: var(--radius-sm);
-    padding: 6px 14px; font-size: 13px; font-family: 'DM Sans', sans-serif;
+    padding: 5px 14px; font-size: 13px; font-family: 'DM Sans', sans-serif;
     cursor: pointer; color: var(--text-muted); transition: all 0.15s;
   }
   .add-tab.active { background: var(--surface2); color: var(--text); font-weight: 500; }
@@ -202,17 +103,59 @@
   .bulk-textarea {
     border: 1px solid var(--border); border-radius: var(--radius-sm);
     padding: 10px 14px; font-size: 13px; font-family: 'DM Sans', sans-serif;
-    background: var(--bg); color: var(--text); width: 100%; min-height: 140px;
+    background: var(--bg); color: var(--text); width: 100%; min-height: 130px;
     resize: vertical; line-height: 1.7;
   }
   .bulk-textarea:focus { outline: none; border-color: var(--border-strong); }
   .bulk-textarea::placeholder { color: var(--text-faint); }
+  #json-file-input { display: none; }
+  .import-drop {
+    border: 1px dashed var(--border-strong); border-radius: var(--radius-sm);
+    padding: 2rem; text-align: center; cursor: pointer; transition: background 0.15s;
+  }
+  .import-drop:hover { background: var(--surface2); }
+  .import-drop p { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; }
+  .import-drop span { font-size: 12px; color: var(--text-faint); }
 
+  /* Topic list */
+  .topic-list { display: flex; flex-direction: column; gap: 6px; }
+  .topic-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 14px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .topic-card:hover { border-color: var(--border-strong); box-shadow: 0 2px 12px rgba(26,23,20,0.06); }
+  .status-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .dot-idea { background: var(--gray-dot); }
+  .dot-progress { background: var(--amber); }
+  .dot-done { background: var(--green); }
+  .topic-info { flex: 1; min-width: 0; }
+  .topic-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topic-category { font-size: 12px; color: var(--text-faint); font-weight: 300; }
+  .status-badge {
+    font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 100px;
+    cursor: pointer; border: none; font-family: 'DM Sans', sans-serif;
+    white-space: nowrap; letter-spacing: 0.02em; user-select: none;
+  }
+  .status-badge:hover { opacity: 0.8; }
+  .badge-idea { background: var(--surface2); color: var(--text-muted); }
+  .badge-progress { background: var(--amber-light); color: var(--amber); }
+  .badge-done { background: var(--green-light); color: var(--green); }
+  .delete-btn {
+    background: transparent; border: none; cursor: pointer;
+    color: var(--text-faint); font-size: 18px; line-height: 1;
+    padding: 2px 4px; transition: color 0.15s; font-weight: 300;
+  }
+  .delete-btn:hover { color: var(--accent); }
   .cat-header {
     font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--text-faint); padding: 1.25rem 0 0.5rem;
   }
   .cat-header:first-child { padding-top: 0; }
+  .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-faint); }
+  .empty-state p { font-size: 14px; margin-top: 8px; }
+  .empty-icon { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--border-strong); }
 
   .toast {
     position: fixed; bottom: 2rem; left: 50%;
@@ -236,27 +179,24 @@
 <body>
 
 <div class="header">
-  <div class="header-top">
-    <div class="brand">
-      <span class="brand-label">Fit4Life Academy</span>
-      <h1 class="brand-title">Fitness Snack Tracker</h1>
-    </div>
-    <div class="import-btn-wrap">
-      <button class="import-btn" onclick="document.getElementById('json-file-input').click()">+ Import JSON</button>
-      <input type="file" id="json-file-input" accept=".json" onchange="importJSON(event)" />
-    </div>
+  <div class="brand">
+    <span class="brand-label">Fit4Life Academy</span>
+    <h1 class="brand-title">Fitness Snack Tracker</h1>
   </div>
   <div class="stats-row" id="stats-row"></div>
 </div>
 
 <div class="main">
-  <div class="filter-bar" id="filter-bar"></div>
-  <div class="topic-list" id="topic-list"></div>
 
+  <!-- Filters -->
+  <div class="filter-bar" id="filter-bar"></div>
+
+  <!-- Add section — sits right below filters -->
   <div class="add-section">
     <div class="add-tabs">
       <button class="add-tab active" onclick="switchTab('single', this)">Add one topic</button>
       <button class="add-tab" onclick="switchTab('bulk', this)">Bulk import</button>
+      <button class="add-tab" onclick="switchTab('json', this)">Import JSON</button>
     </div>
 
     <div id="tab-single" class="single-form">
@@ -280,7 +220,19 @@
         <button class="add-btn" onclick="bulkImport()">Import all</button>
       </div>
     </div>
+
+    <div id="tab-json" style="display:none;">
+      <div class="import-drop" onclick="document.getElementById('json-file-input').click()">
+        <p>Click to select your JSON file</p>
+        <span>File must be a .json exported from this tracker or Claude</span>
+      </div>
+      <input type="file" id="json-file-input" accept=".json" onchange="importJSON(event)" />
+    </div>
   </div>
+
+  <!-- Topic list -->
+  <div class="topic-list" id="topic-list"></div>
+
 </div>
 
 <div class="toast" id="toast"></div>
@@ -436,6 +388,7 @@ function switchTab(tab, el) {
   el.classList.add('active');
   document.getElementById('tab-single').style.display = tab === 'single' ? 'flex' : 'none';
   document.getElementById('tab-bulk').style.display = tab === 'bulk' ? 'block' : 'none';
+  document.getElementById('tab-json').style.display = tab === 'json' ? 'block' : 'none';
 }
 
 function showToast(msg) {
